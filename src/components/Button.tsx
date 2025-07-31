@@ -18,11 +18,36 @@ const Button = ({ children, handleClick, disabled, className = '', backgroundCol
     }
   }, [handleClick, disabled]) // Dependências do callback de clique
 
+  // Define as classes de cores baseadas na prop backgroundColor
+  const getColorClasses = () => {
+    if (disabled) {
+      return 'bg-gray-300 text-gray-500 cursor-not-allowed'
+    }
+
+    const colorMap = {
+      green: 'bg-green-500 hover:bg-green-600 focus:ring-green-500 text-white',
+      blue: 'bg-blue-500 hover:bg-blue-600 focus:ring-blue-500 text-white',
+      red: 'bg-red-500 hover:bg-red-600 focus:ring-red-500 text-white',
+      gray: 'bg-gray-500 hover:bg-gray-600 focus:ring-gray-500 text-white',
+      indigo: 'bg-indigo-500 hover:bg-indigo-600 focus:ring-indigo-500 text-white',
+      purple: 'bg-purple-500 hover:bg-purple-600 focus:ring-purple-500 text-white',
+      pink: 'bg-pink-500 hover:bg-pink-600 focus:ring-pink-500 text-white',
+      yellow: 'bg-yellow-500 hover:bg-yellow-600 focus:ring-yellow-500 text-white',
+    }
+
+    return colorMap[backgroundColor as keyof typeof colorMap] || colorMap.green
+  }
+
   return (
     <button
       {...props} // Passa todas as outras propriedades para o botão HTML
       onClick={onHandleClick} // Atribui o callback de clique ao evento onClick
-      className={`px-4 py-2 text-${textColor} rounded ${disabled ? 'bg-gray-300 cursor-not-allowed' : `bg-${backgroundColor}-500 hover:bg-${backgroundColor}-700`} ${className}`} // Classes CSS condicionais baseadas em propriedades
+      className={`
+        px-4 py-2 rounded-md font-medium text-sm transition-colors duration-200
+        focus:outline-none focus:ring-2 focus:ring-offset-2
+        ${getColorClasses()}
+        ${className}
+      `} // Classes CSS condicionais baseadas em propriedades
       disabled={disabled} // Define se o botão está desabilitado ou não
     >
       {children} {/* Renderiza o conteúdo dentro do botão */}
