@@ -45,12 +45,13 @@ const Input = ({ handleChange, disabled, readOnly, className = '', label = '', c
         {...props} // Passa todas as outras propriedades para o input HTML
         onChange={onHandleChange} // Atribui o callback de mudança ao evento onChange
         className={`
-          w-full block p-2 border rounded 
-          focus:outline-none focus:ring-1 ring-current border-neutral-900
-          ${!hasControllState ? 'bg-white border-neutral-900' : ''}
-          ${disabled ? 'bg-gray-300 border-gray-300 cursor-not-allowed' : ''} 
-          ${readOnly ? 'bg-gray-100 border-gray-100' : ''}
-          ${canShowError ? 'border-red-500 border-2 ring-red-500' : ''} 
+          w-full block px-3 py-2 border border-gray-300 rounded-md text-sm
+          focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+          transition-colors duration-200
+          ${!hasControllState ? 'bg-white border-gray-300 text-gray-900' : ''}
+          ${disabled ? 'bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed' : ''} 
+          ${readOnly ? 'bg-gray-50 border-gray-200 text-gray-600' : ''}
+          ${canShowError ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : ''} 
           ${className}
         `} // Classes CSS condicionais baseadas em propriedades
         disabled={disabled} // Define se o input está desabilitado ou não
